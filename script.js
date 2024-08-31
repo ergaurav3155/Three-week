@@ -1,40 +1,43 @@
 const fs = require('fs');
 
-// Writing content to a new file 'gaurav.txt'
-fs.writeFile("gaurav.txt", "hello hellow gaurav", function(err) {
-    if (err) {
-        console.log(err);
-    } else {
-        console.log("File created");
-    }
+// Creating a new directory 'newDir'
+fs.mkdir("newDir", function(err) {
+    if (err) console.log(err);
+    else console.log("Directory created");
 });
 
-// Reading content from 'gaurav.txt'
-fs.readFile("gaurav.txt", "utf8", function(err, data) {
+// Writing a new file 'newFile.txt' in the new directory 'newDir'
+fs.writeFile("newDir/newFile.txt", "This is a new file in the new directory.", function(err) {
     if (err) console.log(err);
-    else console.log(data);
+    else console.log("File created in newDir");
 });
 
-// Appending content to 'gaurav.txt'
-fs.appendFile("gaurav.txt", "welcom", function(err) {
+// Reading content from 'newFile.txt'
+fs.readFile("newDir/newFile.txt", "utf8", function(err, data) {
     if (err) console.log(err);
-    else console.log("Appended data");
+    else console.log("Content of newFile.txt:", data);
 });
 
-// Renaming 'gaurav.txt' to 'anurag.txt'
-fs.rename("gaurav.txt", "anurag.txt", function(err) {
+// Appending content to 'newFile.txt'
+fs.appendFile("newDir/newFile.txt", "\nAppended content.", function(err) {
     if (err) console.log(err);
-    else console.log("Name change successful");
+    else console.log("Appended content to newFile.txt");
 });
 
-// Deleting 'anurag.txt'
-/* fs.unlink("anurag.txt", function(err) {
+// Renaming 'newFile.txt' to 'renamedFile.txt' in the same directory
+fs.rename("newDir/newFile.txt", "newDir/renamedFile.txt", function(err) {
     if (err) console.log(err);
-    else console.log("Deleted");
-}); */
+    else console.log("File renamed to renamedFile.txt");
+});
 
-// Deleting a directory 'fillsystem2' recursively
-fs.rm("fillsystem2", { recursive: true }, function(err) {
+// Deleting the renamed file 'renamedFile.txt'
+fs.unlink("newDir/renamedFile.txt", function(err) {
     if (err) console.log(err);
-    else console.log("Delete successful");
+    else console.log("File deleted");
+});
+
+// Deleting the 'newDir' directory
+fs.rmdir("newDir", function(err) {
+    if (err) console.log(err);
+    else console.log("Directory deleted");
 });
